@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file:///Applications/MAMP/htdocs/AndroidStudio_Proyect/BuenosDiasBebe/BuenosDiasBebe.iml" filepath="/Applications/MAMP/htdocs/AndroidStudio_Proyect/BuenosDiasBebe/BuenosDiasBebe.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BuenosDiasBebe.iml" filepath="$PROJECT_DIR$/BuenosDiasBebe.iml" />
+      <module fileurl="file:///Applications/MAMP/htdocs/AndroidStudio_Proyect/GoodMorningBaby/GoodMorningBaby.iml" filepath="/Applications/MAMP/htdocs/AndroidStudio_Proyect/GoodMorningBaby/GoodMorningBaby.iml" />
+      <module fileurl="file:///Applications/MAMP/htdocs/AndroidStudio_Proyect/BuenosDiasBebe/app/app.iml" filepath="/Applications/MAMP/htdocs/AndroidStudio_Proyect/BuenosDiasBebe/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file:///Applications/MAMP/htdocs/AndroidStudio_Proyect/GoodMorningBaby/app/app.iml" filepath="/Applications/MAMP/htdocs/AndroidStudio_Proyect/GoodMorningBaby/app/app.iml" />
+    </modules>
+  </component>
+</project>
