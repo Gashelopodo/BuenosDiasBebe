@@ -6,15 +6,25 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Environment;
 import android.os.IBinder;
 import android.support.annotation.IntDef;
 import android.support.v4.app.NotificationCompat;
+import android.util.Base64;
 import android.util.Log;
+import android.widget.ImageView;
 
 import com.google.gson.Gson;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Locale;
 
 public class MyServiceAlarm extends Service {
@@ -86,24 +96,50 @@ public class MyServiceAlarm extends Service {
                     Log.d(getClass().getCanonicalName(), "FOTO REPETIDA");
 
                 } else {
-                    sendNotification(notification);
+                    Bitmap bitmap = saveImage(notification);
+                    sendNotification(notification, bitmap);
                     prefs.setNotification(notification);
                 }
             }
         }else{
-            sendNotification(notification);
+            Bitmap bitmap = saveImage(notification);
+            sendNotification(notification, bitmap);
             prefs.setNotification(notification);
         }
 
     }
 
-    private void sendNotification(Notification notification){
+    private Bitmap saveImage(Notification notification){
+        byte[] decodedString = Base64.decode(notification.getFoto(), Base64.DEFAULT);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        bitmap = bitmapCompress(bitmap);
+
+        //convertimos de nuevo a base64
+        ByteArrayOutputStream byteArrayOS = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOS);
+        String base64 = Base64.encodeToString(byteArrayOS.toByteArray(), Base64.DEFAULT);
+        notification.setFoto(base64);
+
+        return bitmap;
+    }
+
+    public Bitmap bitmapCompress(Bitmap bitmap){
+        Bitmap bitmap_compress = null;
+        int height = 500;
+        int width = (bitmap.getHeight()*height)/bitmap.getWidth();
+        bitmap_compress = Bitmap.createScaledBitmap(bitmap, height, width, true);
+        return bitmap_compress;
+    }
+
+    private void sendNotification(Notification notification, Bitmap bitmap){
 
         Gson gson = new Gson();
-
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.mipmap.ic_launcher_round)
                 .setContentTitle("GMB APP")
+                .setLargeIcon(bitmap)
+                .setSmallIcon(R.mipmap.ic_launcher_round)
                 .setContentText("¡Buenos días BEBE!");
 
         Intent intent = new Intent(this, NotificationActivity.class);

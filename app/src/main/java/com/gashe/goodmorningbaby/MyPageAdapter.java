@@ -20,11 +20,9 @@ public class MyPageAdapter extends FragmentStatePagerAdapter {
         Fragment fragment = null;
 
         switch (position){
-            case 0: fragment = new LastPictureFragment();
+            case 0: fragment = new HistorialFragment();
                 break;
-            case 1: fragment = new HistorialFragment();
-                break;
-            case 2: fragment = new SettingFragment();
+            case 1: fragment = new SettingFragment();
         }
 
         return fragment;
@@ -32,7 +30,7 @@ public class MyPageAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 2;
     }
 
 
@@ -42,11 +40,9 @@ public class MyPageAdapter extends FragmentStatePagerAdapter {
         String response = "";
 
         switch (position){
-            case 0: response = "ÚLTIMA FOTO";
+            case 0: response = "HISTORIAL";
                 break;
-            case 1: response = "HISTORIAL";
-                break;
-            case 2: response = "AJUSTES";
+            case 1: response = "AJUSTES";
         }
 
         return response;

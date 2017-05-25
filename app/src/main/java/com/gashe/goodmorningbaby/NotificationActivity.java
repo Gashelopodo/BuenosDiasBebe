@@ -1,8 +1,12 @@
 package com.gashe.goodmorningbaby;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -19,8 +23,14 @@ public class NotificationActivity extends AppCompatActivity {
         Gson gson = new Gson();
         Notification notification = gson.fromJson(notification_string, Notification.class);
 
-        TextView textView = (TextView) findViewById(R.id.myTextView);
-        textView.setText(notification.getDia()+"/"+notification.getMes()+"/"+notification.getAnio());
+        byte[] decodedString = Base64.decode(notification.getFoto(), Base64.DEFAULT);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
+        TextView textView = (TextView) findViewById(R.id.myDate);
+        textView.setText("Enviado el "+notification.getDia()+"/"+notification.getMes()+"/"+notification.getAnio());
+
+        ImageView imageView = (ImageView) findViewById(R.id.myImage);
+        imageView.setImageBitmap(bitmap);
 
     }
 }
