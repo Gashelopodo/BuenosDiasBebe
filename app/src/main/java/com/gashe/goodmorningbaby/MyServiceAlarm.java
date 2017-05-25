@@ -63,11 +63,25 @@ public class MyServiceAlarm extends Service {
     // funciones adicionales
     public void programAlarm(){
 
+        Prefs prefs = new Prefs(this);
+        String hour = ((prefs.getHourNotification()).split(":"))[0];
+        int hour_int = Integer.parseInt(hour);
+        long alarm_time;
+
+
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        Calendar calendar = Calendar.getInstance(); // momento actual
-        //calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar);
-        long actual_time = calendar.getTimeInMillis();
-        long alarm_time = actual_time + +10000;
+        Calendar calendar_program = Calendar.getInstance(); // momento actual
+
+        long actual_time = calendar_program.getTimeInMillis();
+        if(calendar_program.get(Calendar.HOUR_OF_DAY) >= hour_int){
+            Log.d(getClass().getCanonicalName(), "AUmento un día");
+            calendar_program.add(Calendar.DATE, 1);
+        }
+
+        calendar_program.set(calendar_program.get(Calendar.YEAR),
+                calendar_program.get(Calendar.MONTH),
+                calendar_program.get(Calendar.DAY_OF_MONTH), hour_int, 0);
+        alarm_time = calendar_program.getTimeInMillis();
 
         Log.d(getClass().getCanonicalName(), "Tiempo actual: " + actual_time);
         Log.d(getClass().getCanonicalName(), "Tiempo alarma: " + alarm_time);
