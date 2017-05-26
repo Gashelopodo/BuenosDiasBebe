@@ -1,9 +1,10 @@
-package com.gashe.goodmorningbaby;
+package com.gashe.goodmorningbaby.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.gashe.goodmorningbaby.models.Notification;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

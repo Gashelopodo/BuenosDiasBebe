@@ -1,4 +1,4 @@
-package com.gashe.goodmorningbaby;
+package com.gashe.goodmorningbaby.services;
 
 import android.app.AlarmManager;
 import android.app.NotificationManager;
@@ -8,24 +8,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.os.Environment;
 import android.os.IBinder;
-import android.support.annotation.IntDef;
 import android.support.v4.app.NotificationCompat;
 import android.util.Base64;
 import android.util.Log;
-import android.widget.ImageView;
 
+import com.gashe.goodmorningbaby.https.CheckNotificationAsyncTask;
+import com.gashe.goodmorningbaby.models.Notification;
+import com.gashe.goodmorningbaby.activities.NotificationActivity;
+import com.gashe.goodmorningbaby.R;
+import com.gashe.goodmorningbaby.receivers.MyReceiverAlarm;
+import com.gashe.goodmorningbaby.utils.Prefs;
 import com.google.gson.Gson;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.Date;
-import java.util.Locale;
 
 public class MyServiceAlarm extends Service {
 
@@ -64,9 +62,11 @@ public class MyServiceAlarm extends Service {
     public void programAlarm(){
 
         Prefs prefs = new Prefs(this);
-        String hour = ((prefs.getHourNotification()).split(":"))[0];
-        int hour_int = Integer.parseInt(hour);
+        String[] date = (prefs.getHourNotification()).split(":");
+        int hour_int = Integer.parseInt(date[0]);
+        int minute_int = Integer.parseInt(date[1]);
         long alarm_time;
+
 
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
@@ -74,13 +74,15 @@ public class MyServiceAlarm extends Service {
 
         long actual_time = calendar_program.getTimeInMillis();
         if(calendar_program.get(Calendar.HOUR_OF_DAY) >= hour_int){
-            Log.d(getClass().getCanonicalName(), "AUmento un día");
-            calendar_program.add(Calendar.DATE, 1);
+            if(calendar_program.get(Calendar.MINUTE) >= minute_int){
+                Log.d(getClass().getCanonicalName(), "AUmento un día pq son mas minutos");
+                calendar_program.add(Calendar.DATE, 1);
+            }
         }
 
         calendar_program.set(calendar_program.get(Calendar.YEAR),
                 calendar_program.get(Calendar.MONTH),
-                calendar_program.get(Calendar.DAY_OF_MONTH), hour_int, 0);
+                calendar_program.get(Calendar.DAY_OF_MONTH), hour_int, minute_int);
         alarm_time = calendar_program.getTimeInMillis();
 
         Log.d(getClass().getCanonicalName(), "Tiempo actual: " + actual_time);
@@ -154,6 +156,7 @@ public class MyServiceAlarm extends Service {
                 .setContentTitle("GMB APP")
                 .setLargeIcon(bitmap)
                 .setSmallIcon(R.mipmap.ic_launcher_round)
+                .setAutoCancel(true)
                 .setContentText("¡Buenos días BEBE!");
 
         Intent intent = new Intent(this, NotificationActivity.class);

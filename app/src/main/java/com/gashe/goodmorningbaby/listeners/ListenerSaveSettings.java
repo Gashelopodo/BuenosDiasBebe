@@ -1,13 +1,17 @@
-package com.gashe.goodmorningbaby;
+package com.gashe.goodmorningbaby.listeners;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.SwitchCompat;
 import android.view.View;
-import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.gashe.goodmorningbaby.R;
+import com.gashe.goodmorningbaby.fragments.SettingFragment;
+import com.gashe.goodmorningbaby.services.MyServiceAlarm;
+import com.gashe.goodmorningbaby.utils.Constants;
+import com.gashe.goodmorningbaby.utils.Prefs;
 
 /**
  * Created by Gashe on 23/5/17.
@@ -26,8 +30,8 @@ public class ListenerSaveSettings implements View.OnClickListener {
     public void onClick(View view) {
 
         Activity activity = (Activity) context;
-        Spinner spinner = (Spinner) activity.findViewById(R.id.spinnerHours);
-        String hour = spinner.getSelectedItem().toString();
+        TextView textView = (TextView) activity.findViewById(R.id.timepicker);
+        String hour = textView.getText().toString();
         sendNotification = SettingFragment.isChecked;
 
         Prefs prefs = new Prefs(context);

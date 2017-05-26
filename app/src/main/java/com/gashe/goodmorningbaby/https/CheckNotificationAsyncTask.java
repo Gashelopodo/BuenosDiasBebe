@@ -1,12 +1,11 @@
-package com.gashe.goodmorningbaby;
+package com.gashe.goodmorningbaby.https;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 
+import com.gashe.goodmorningbaby.models.Notification;
+import com.gashe.goodmorningbaby.services.MyServiceAlarm;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;

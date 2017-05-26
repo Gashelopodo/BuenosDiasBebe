@@ -1,4 +1,4 @@
-package com.gashe.goodmorningbaby;
+package com.gashe.goodmorningbaby.utils;
 
 /**
  * Created by Gashe on 23/5/17.

@@ -1,9 +1,11 @@
-package com.gashe.goodmorningbaby;
+package com.gashe.goodmorningbaby.receivers;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+
+import com.gashe.goodmorningbaby.services.MyServiceAlarm;
 
 public class MyReceiverAlarm extends BroadcastReceiver {
 

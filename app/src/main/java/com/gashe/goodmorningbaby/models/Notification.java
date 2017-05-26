@@ -1,4 +1,4 @@
-package com.gashe.goodmorningbaby;
+package com.gashe.goodmorningbaby.models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,6 +13,7 @@ public class Notification implements Serializable {
     private int anio;
     private int dia;
     private int mes;
+    private int position;
 
     public Notification(String foto, int anio, int dia, int mes) {
         this.foto = foto;
@@ -52,4 +53,13 @@ public class Notification implements Serializable {
     public void setMes(int mes) {
         this.mes = mes;
     }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
 }

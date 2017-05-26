@@ -1,9 +1,11 @@
-package com.gashe.goodmorningbaby;
+package com.gashe.goodmorningbaby.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.util.Log;
+
+import com.gashe.goodmorningbaby.fragments.HistorialFragment;
+import com.gashe.goodmorningbaby.fragments.SettingFragment;
 
 /**
  * Created by Gashe on 22/5/17.

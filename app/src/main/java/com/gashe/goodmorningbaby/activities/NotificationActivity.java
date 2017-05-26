@@ -1,4 +1,4 @@
-package com.gashe.goodmorningbaby;
+package com.gashe.goodmorningbaby.activities;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -9,6 +9,8 @@ import android.util.Base64;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.gashe.goodmorningbaby.models.Notification;
+import com.gashe.goodmorningbaby.R;
 import com.google.gson.Gson;
 
 public class NotificationActivity extends AppCompatActivity {
@@ -32,5 +34,11 @@ public class NotificationActivity extends AppCompatActivity {
         ImageView imageView = (ImageView) findViewById(R.id.myImage);
         imageView.setImageBitmap(bitmap);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }

@@ -42,11 +42,16 @@
                     android:textSize="16sp"
                     android:text="Programar hora"></TextView>
 
-                <Spinner
+
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/spinnerHours">
-                </Spinner>
+                    android:id="@+id/timepicker"
+                    android:text="Pulsa para elegir hora"
+                    android:textAlignment="textEnd"
+                    android:onClick="showTimePicker"
+                    android:clickable="true"/>
+
 
             </TableRow>
             <TableRow
@@ -64,6 +69,8 @@
             </TableRow>
 
         </TableLayout>
+
+
 
 
 </ScrollView>
